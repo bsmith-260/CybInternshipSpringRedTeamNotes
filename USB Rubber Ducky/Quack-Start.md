@@ -1,0 +1,1 @@
+The `Quack-Start` menu can be accessed on the Hak5 website through [this link](https://docs.hak5.org/hak5-usb-rubber-ducky/unboxing-quack-start-guide/). 
