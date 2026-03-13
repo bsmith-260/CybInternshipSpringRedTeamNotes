@@ -4,7 +4,7 @@ When plugged into a device, and the device is started, the operating system will
 
 Before using the USB Rubber Ducky, the [[Quack-Start]] menu should be accessed as it gives the user the necessary details on how to configure and use their device.
 
-The USB Rubber Ducky and its payload can be configured via the [[Hak5 Payload Studio Pro]]. 
+The USB Rubber Ducky and its payload can be configured via the [[Hak5 Payload Studio Pro]]. Hi there
 
 ## Use Cases
 The USB Rubber Ducky 
