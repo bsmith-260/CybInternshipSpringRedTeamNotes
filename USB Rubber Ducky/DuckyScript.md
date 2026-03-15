@@ -1,3 +1,5 @@
+## Ducky Script
+
 `DuckyScript` began as a simple programming language with only three commands that could be learned within minutes. Today, it is in version 3.0, it is a feature loaded and structured programming language. It is capable of complex attacks, while being relatively simple still.
 
 In the RubberDucky, the payload is compiled within [[Hak5 Payload Studio Pro]]. Within PayloadStudio, the DuckyScript language offers many capabilities that a usual programming language offers.
@@ -129,7 +131,6 @@ Toggles scroll lock state (rarely used; may affect some apps).
 DELAY  
 Pauses payload execution for the specified time in milliseconds. Useful for waiting on windows, prompts, or device enumeration.  
 Note: minimum delay is typically 20ms, and timing can vary by host and `ATTACKMODE`.  
-  
   
 ## Button Controls  
   
