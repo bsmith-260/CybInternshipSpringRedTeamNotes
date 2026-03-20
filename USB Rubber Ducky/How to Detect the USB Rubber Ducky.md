@@ -19,6 +19,8 @@
 5. Run `auditpol /get /subcategory:"Plug and Play Events"` to make sure that the log creation is activated. It will say `Success` next to the subcategory name if it is.
 6. Return to Event Viewer, and you will see logs of devices plugged into the computer after the rule is changed.
 7. To activate `DriverFrameworks-UserMode` logs, you have to locate its folder in the `Applications and Services Logs` folder, to `Microsoft`, to `Windows` to the `DriverFrameworks-UserMode` folder.
+8. After finding this folder, click the expansion arrow, right click on the `Operational` log channel, and click on properties.
+9. Click the `Enable logging` button and ensure that it is highlighted blue.
 
 ## How to Correlate Suspicious Activity to the Ducky
 If you discover a suspicious new Event ID 6416 ("A new external device was recognized by the system.")
