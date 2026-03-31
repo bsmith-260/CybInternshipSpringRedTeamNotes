@@ -23,6 +23,18 @@
 9. Click the `Enable logging` button and ensure that it is highlighted blue.
 
 ## How to Correlate Suspicious Activity to the Ducky
-If you discover a suspicious new Event ID 6416 ("A new external device was recognized by the system.")
+1. When correlating logs, it is smart to check the timestamps of the logs to be able to correlate them. With the Rubber Ducky being a fast action device, it is likely that a new USB insertion followed by commands being ran are correlated with each other.
+2. Compare the time of the suspected device connection with the logged-in user session and the processes launched right after. If shells, PowerShell, Run dialogs, or scripting tools start without normal user interaction, that is suspicious.
+3. Trace the process chain after the suspicious event. Correlate the first opened process with its child processes. For example, if `explorer.exe` is followed by `cmd.exe`, `powershell.exe`, or a downloaded executable immediately after USB insertion, that can indicate an injected payload.
+4. Check for any follow-on behavior such as creation of new accounts, registry changes, scheduled tasks, dropped files, outbound connections, or credential access attempts shortly after the suspected keystroke injection. These help confirm whether the device was used in an actual attack.
+
+## Common Attacks
+1. Malware Installation
+2. Backdoor Creation
+3. Data Exfiltration
+4. Privilege Abuse
+5. Credential Collection
+6. Terminal/Command Prompt Commands
+7. Prank Payloads
 
 ## Detection Demonstration
