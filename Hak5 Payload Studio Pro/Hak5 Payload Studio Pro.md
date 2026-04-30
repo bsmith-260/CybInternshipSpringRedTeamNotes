@@ -31,3 +31,16 @@ Each selection has differences, but all use DuckyScript. In this example, we are
 
 The script for the payload can be changed and the options that can used can be found on the [[DuckyScript]] information page.
 
+
+## How to Use
+
+After purchasing `Hak5 Payload Studio`, you are able to login with your email address and the given license key through your linked email. 
+
+Select the device configuration of the tool that you are using, and the script editor will then appear.
+
+A default comment for the Payload title, author, and description will be listed, with a default 'Hello World!' string. 
+
+You can edit the payload for the `USB Rubber Ducky` with the `DuckyScript` scripting language.
+
+Payloads can be used for both harmful, and innocent device actions. Task automation, data exfiltration, prank payloads, 
+

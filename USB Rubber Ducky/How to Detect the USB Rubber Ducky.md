@@ -11,6 +11,11 @@
 	* `Event Viewer` is a Windows tool that can be used to monitor, troubleshoot, and diagnose the system's health based on detailed logs of application, security, and system events.
 	* When the Ducky is plugged into the target computer, a Windows Security log with an Event ID of 6416 is created. If these logs are not set to be tracked by default, you must activate logging through an administrator CMD.
 	* Event logs under `DriverFrameworks-UserMode` also will appear as a result of the device being plugged in.
+4. Unexpected Command Prompt or PowerShell Terminals
+	* A common attack that the `RubberDucky` is usually apart of is running commands through CMD or PowerShell from devices logged in with privileged accounts.
+5. Processes or Device Behavior
+	* When investigating an attack, or checking based on any suspicion, you should look for files being downloaded, new executables running, browser windows created, system settings being changed, etc.
+	* In a forensic review, payload behaviors can be tied to time periods relating to Windows logs such as USB insertion, or command activity.
 ###### How to Activate Log Creation
 1. Open an administrator CMD.
 2. Run `auditpol /list /subcategory:*` to list all log categories, with their subcategories.
@@ -30,11 +35,17 @@
 
 ## Common Attacks
 1. Malware Installation
+	* Can rapidly enter commands that download, drop, or launch malicious software on a targeted system.
 2. Backdoor Creation
+	* Can create a hidden form of access that allows the attacker to reconnect to the system at a later time.
 3. Data Exfiltration
+	* Collecting of sensitive files/information and sending them to a different location.
 4. Privilege Abuse
+	* Targeting high privileged accounts to make bigger system changes, or access highly restricted resources.
 5. Credential Collection
+	* Can launch commands or scripts meant to capture usernames, passwords, or other sensitive data.
 6. Terminal/Command Prompt Commands
+	* Opening CMD, PowerShell, or some form of terminal and execute prewritten commands at a high speed.
 7. Prank Payloads
+	* Payloads made to annoy or confuse the user system, such as opening random windows, changing settings, or typing fake messages, rather than causing severe system damage.
 
-## Detection Demonstration
